@@ -45,8 +45,8 @@ catch (Exception exception)
             break;
 
         case InvalidOperationException:
-            // Console.WriteLine("Something in this program causes the interpreter to break. Please try a different program.");
-            // return 1;
+            Console.WriteLine("Something in this program causes the interpreter to break. Please try a different program.");
+            return 1;
         
         default:
             throw;
