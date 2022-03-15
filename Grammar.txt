@@ -1,0 +1,20 @@
+<prog>              ->  <stmt> ";" ( <stmt> ";" )*
+
+<stmt>              ->  "var" VAR_IDENT ":" <type> [ ":=" <expr> ]
+                        | VAR_IDENT ":=" <expr>
+                        | "for" VAR_IDENT "in" <expr> ".." <expr> "do" <stmt> ";" ( <stmt> ";" )* "end" "for"
+                        | "read" VAR_IDENT
+                        | "print" <expr>
+                        | "assert" "(" <expr> ")"
+
+<expr>              ->  <expr_6>
+<expr_6>            ->  <expr_5> ( "&" <expr_5> ) *      
+<expr_5>            ->  <expr_4> ( "=" <expr_4> ) *
+<expr_4>            ->  <expr_3> ( "<" <expr_3> ) *
+<expr_3>            ->  <expr_2> ( ( "+" | "-" ) <expr_2> ) *
+<expr_2>            ->  <expr_1> ( ( "*" | "/" ) <expr_1> ) *
+<expr_1>            ->  "!" <expr_1>
+                        | <expr_0>
+<expr_0>            -> INT | STRING | VAR_IDENT | BOOL | "(" <expr> ")"
+
+<type>              ->  "int" | "string" | "bool"
