@@ -90,7 +90,9 @@ public class Analyzer
                 _variables.Add(varName,
                     new DeclaredVariable(varName, type));
 
-                return new AstDeclaration(varName, type);
+                var startToken = ((ParseTreeLeaf) branch.Children[0]).Token;
+                
+                return new AstDeclaration(varName, type, startToken);
             }
             default:
                 throw new InvalidOperationException();
@@ -124,7 +126,9 @@ public class Analyzer
 
         _variables.Add(variable.Identifier, variable);
 
-        return new AstDeclarationAndAssignment(varName, variableType, expression);
+        var startToken = ((ParseTreeLeaf) branch.Children[0]).Token;
+        
+        return new AstDeclarationAndAssignment(varName, variableType, expression, startToken);
     }
 
     private AstAssignment Assignment(ParseTreeNode node)

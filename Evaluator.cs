@@ -57,7 +57,16 @@ public class Evaluator
 
     private void ExecuteDeclaration(AstDeclaration node)
     {
-        DeclareVariable(node.VarName, node.Type);
+        if (_programState.Variables.ContainsKey(node.VarName))
+            throw new EvaluationException($"At {node.StartToken.Line}: Re-declaration of variable \"{node.VarName}\"");
+
+        _programState.Variables[node.VarName] = node.Type switch
+        {
+            AstType.STRING => "",
+            AstType.INT => 0,
+            AstType.BOOL => false,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
     }
 
     private void ExecuteDeclarationAndAssignment(AstDeclarationAndAssignment node)
@@ -301,20 +310,6 @@ public class Evaluator
             throw new InvalidOperationException();
 
         _programState.Variables[identifier] = value;
-    }
-
-    private void DeclareVariable(string identifier, AstType type)
-    {
-        if (_programState.Variables.ContainsKey(identifier))
-            throw new InvalidOperationException();
-
-        _programState.Variables[identifier] = type switch
-        {
-            AstType.STRING => "",
-            AstType.INT => 0,
-            AstType.BOOL => false,
-            _ => throw new InvalidOperationException(),
-        };
     }
 }
 

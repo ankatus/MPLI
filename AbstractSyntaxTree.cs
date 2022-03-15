@@ -111,20 +111,22 @@ public abstract class AstStatement
 
 public class AstDeclaration : AstStatement
 {
-    public AstDeclaration(string varName, AstType type)
+    public AstDeclaration(string varName, AstType type, Token startToken)
     {
+        StartToken = startToken;
         VarName = varName;
         Type = type;
     }
 
+    public Token StartToken { get; }
     public string VarName { get; }
     public AstType Type { get; }
 }
 
 public class AstDeclarationAndAssignment : AstDeclaration
 {
-    public AstDeclarationAndAssignment(string varName, AstType type, AstExpression expression) : base(varName,
-        type)
+    public AstDeclarationAndAssignment(string varName, AstType type, AstExpression expression, Token startToken) : base(varName,
+        type, startToken)
     {
         Expression = expression;
     }
