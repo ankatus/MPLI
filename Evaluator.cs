@@ -58,7 +58,7 @@ public class Evaluator
     private void ExecuteDeclaration(AstDeclaration node)
     {
         if (_programState.Variables.ContainsKey(node.VarName))
-            throw new EvaluationException($"At {node.StartToken.Line}: Re-declaration of variable \"{node.VarName}\"");
+            throw new EvaluationException($"At line {node.StartToken.Line}: Re-declaration of variable \"{node.VarName}\"");
 
         _programState.Variables[node.VarName] = node.Type switch
         {
