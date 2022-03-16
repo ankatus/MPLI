@@ -215,7 +215,7 @@ public class Scanner
 
         if (!MoreInputLeft())
             throw new ScanningException(
-                $"Ran out of characters while building string starting at line {_currentLine}, col {_currentCol}.");
+                $"Ran out of characters while building string starting at line {_currentLine}, col {startCol}.");
 
         Advance();
 
@@ -225,7 +225,7 @@ public class Scanner
 
             if (!MoreInputLeft())
                 throw new ScanningException(
-                    $"Ran out of characters while building string starting at line {_currentLine}, col {_currentCol}.");
+                    $"Ran out of characters while building string starting at line {_currentLine}, col {startCol}.");
 
             Advance();
         }
